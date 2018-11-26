@@ -10,4 +10,4 @@ jobs:
           working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions
       - run:
           working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions/nuget/
-          command: echo 'dotnet nuget push -k $NUGET_KEY' -s https://api.nuget.org/v3/index.json
+          command: echo 'dotnet nuget push -k $NUGET_KEY' -s https://api.nuget.org/v3/index.json ./*.nupkg
