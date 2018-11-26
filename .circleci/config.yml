@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image:  microsoft/aspnetcore-build:2.0
+    steps:
+      - checkout
+      - run: 
+          command: dotnet pack --include-symbols --include-source -c Release /p:Version=0.1.0 -o ./nuget
+          working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions
+      - run:
+          working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions/nuget/
+          command: echo 'dotnet nuget push -k $NUGET_KEY' -s https://api.nuget.org/v3/index.json
