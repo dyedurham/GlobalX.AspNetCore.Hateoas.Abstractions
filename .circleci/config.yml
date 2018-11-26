@@ -17,4 +17,4 @@ jobs:
           command: find .
       - run:
           working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions/nuget/
-          command: echo dotnet nuget push -k $NUGET_KEY -s https://api.nuget.org/v3/index.json ./GlobalX.AspNetCore.Hateoas.Abstractions.$VERSION.nupkg | bash
+          command: echo 'dotnet nuget push -k "$NUGET_KEY" -s https://api.nuget.org/v3/index.json ./GlobalX.AspNetCore.Hateoas.Abstractions."$VERSION".nupkg | bash'
