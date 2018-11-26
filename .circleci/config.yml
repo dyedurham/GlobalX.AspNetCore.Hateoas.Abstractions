@@ -10,8 +10,11 @@ jobs:
           command: |
              export VERSION=$(grep -oP "<Version>(.*)</Version>" GlobalX.AspNetCore.Hateoas.Abstractions.csproj |  cut -d ">" -f 2 | cut -d "<" -f 1) >> $BASH_ENV
       - run: 
-          command: dotnet pack --include-symbols --include-source -c Release /p:Version=0.1.0 -o ./nuget
+          command: dotnet pack --include-symbols --include-source -c Release -o ./nuget
           working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions
+      - run:
+          working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions/nuget
+          command: find .
       - run:
           working_directory: src/GlobalX.AspNetCore.Hateoas.Abstractions/nuget/
           command: echo dotnet nuget push -k $NUGET_KEY -s https://api.nuget.org/v3/index.json ./GlobalX.AspNetCore.Hateoas.Abstractions.$VERSION.nupkg | bash
